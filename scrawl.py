@@ -9,7 +9,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 logging.basicConfig(
-    filename="crawlyScript.log",
+    filename="scrawl.log",
     level=logging.INFO,
     format="%(asctime)s - %(name)s@%(filename)s - %(levelname)s: %(msg)s",
     datefmt="%Y-%m-%d %H:%M:%S")
@@ -27,8 +27,8 @@ visited_urls = []
 broken_urls = []
 slow_urls = []
 
-broken_url_log = "Logrhythm404s.log"
-slow_url_log = "LogrhythmSlowPages.log"
+broken_url_log = "404s_scrawl.log"
+slow_url_log = "slowpages_scrawl.log"
 
 def wait(driver,
         locator_string,
@@ -94,7 +94,6 @@ if __name__ == '__main__':
     try:
         login(url, username, password, driver)
         current_page = driver.current_url
-
         links = [x.get_attribute('href') for x in driver.find_elements_by_tag_name('a')]
         recursive_link_finder(driver, links)
             
@@ -106,6 +105,3 @@ if __name__ == '__main__':
         print "\nBROKEN LINKS: "
         print broken_urls
         driver.quit()
-
-
-
